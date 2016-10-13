@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="lib" path="libs/androidasync-2.1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/BmobNewIM_2.0.5_20160601.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/BmobSDK_V3.4.7_0527.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/okhttp-3.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/okio-1.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/bfcloudplayer.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/BFCloudPlayerDemoWithUI"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

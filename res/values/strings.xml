@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TNLive</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="main_rb_live">点播</string>
+    <string name="main_rb_live_list">热播</string>
+    <string name="main_rb_live_chat">沟通</string>
+    <string name="main_rb_live_set">设置</string>
+    <string name="action_settings">Settings</string>
+    <!-- 登录 -->
+    <string name="login_tv_user_name">账号：</string>
+    <string name="login_tv_user_name_hint">请输入账号!</string>
+    <string name="login_tv_user_pwd">密码：</string>
+    <string name="login_tv_title">登录界面</string>
+    <string name="login_tv_user_pwd_hint">请输入密码！</string>
+    <string name="login_btn_login">登录</string>
+    <string name="login_tv_regist">木有账号</string>
+    <!-- 注册 -->
+    <string name="rgist_tv_regist">注册界面</string>
+    <string name="rgist_tv_user_name">账号：</string>
+    <string name="rgist_tv_user_name_hint">请输入账号！</string>
+    <string name="rgist_tv_user_pwd_hint">请输入密码</string>
+    <string name="rgist_tv_user_pwd">密码：</string>
+    <string name="rgist_tv_user_pwd_again">确认：</string>
+    <string name="rgist_tv_user_pwd_again_hint">请输入确认密码！</string>
+    <string name="rgist_btn">注册</string>
+    <string name="rgist_tv_back">登录</string>
+    <!-- 新手指导-->
+    <string name="guidance_btn_to_main">开始体验</string>
+    <!-- 直播界面-->
+    <string name="live_play_et_message_hint">请输入弹幕内容</string>
+    <string name="live_play_btn_message_text">弹幕</string>
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="@string/rgist_tv_regist"/>
+
+        <TextView
+            android:id="@+id/regist_tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="bottom"
+            android:text="@string/rgist_tv_back"
+            android:textColor="#52B731"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+     >
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="@string/rgist_tv_user_name"/>
+    <EditText 
+        android:id="@+id/regist_et_user_name"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:hint="@string/rgist_tv_user_name_hint"/>
+    
+</LinearLayout>
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+     >
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/rgist_tv_user_pwd"/>
+    <EditText 
+        android:id="@+id/regist_et_user_pwd"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:hint="@string/rgist_tv_user_pwd_hint"/>
+    
+</LinearLayout>
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+  >
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/rgist_tv_user_pwd_again"/>
+    <EditText 
+        android:id="@+id/regist_et_user_name_again"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:hint="@string/rgist_tv_user_pwd_again_hint"/>
+    
+</LinearLayout>
+<View 
+    android:layout_width="match_parent"
+    android:layout_height="30dp"/>
+<Button
+    android:id="@+id/regist_btn"
+    android:padding="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/rgist_btn"
+    android:background="@color/login_btn_color"/>
+</LinearLayout>
