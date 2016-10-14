@@ -16,4 +16,5 @@ public interface ConfigUtil {
 	String LIVE_URL_KEY="mUrl";
 	/***直播频道ID传递key值*/
 	String LIVE_ID_KEY="mGRID";
+	
 }

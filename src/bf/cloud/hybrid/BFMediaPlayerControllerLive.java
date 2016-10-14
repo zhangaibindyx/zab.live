@@ -49,6 +49,7 @@ public class BFMediaPlayerControllerLive extends BFMediaPlayerControllerBase {
 	public void onError(int errorCode) {
 		super.onError(errorCode);
 		// 子类处理个别错误�?
+		Log.i("TIL", "错误代码" + errorCode);
 	}
 
 	@Override
@@ -61,6 +62,10 @@ public class BFMediaPlayerControllerLive extends BFMediaPlayerControllerBase {
 			}
 			if (mControllerVideoTitle != null)
 				mControllerVideoTitle.setText(mLivePlayer.getVideoName());
+			break;
+		case BasePlayer.EVENT_TYPE_MEDIAPLAYER_STOP:
+			mLivePlayer.setForceStartFlag(true);
+			mLivePlayer.start();
 			break;
 		default:
 			break;
@@ -101,15 +106,15 @@ public class BFMediaPlayerControllerLive extends BFMediaPlayerControllerBase {
 				public void onClick(View v) {
 					if (mEnableBackToPortrait)
 						backToPortrait();
-					else{
-						new Thread(){
+					else {
+						new Thread() {
 							@Override
 							public void run() {
 								try {
 									Instrumentation ins = new Instrumentation();
 									ins.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK);
 								} catch (Exception e) {
-									
+
 								}
 							};
 						}.start();
@@ -143,12 +148,13 @@ public class BFMediaPlayerControllerLive extends BFMediaPlayerControllerBase {
 
 							@Override
 							public void onClick(View v) {
-								if (mLivePlayer.getPlayerType() == PLAYER_TYPE.FULL_SIGHT){
+								if (mLivePlayer.getPlayerType() == PLAYER_TYPE.FULL_SIGHT) {
 									if (mLivePlayer.getFullSightRenderMode() == RenderMode.FULLVIEW) {
 										changeFullSightMode(RenderMode.FULLVIEW3D);
 										mChangeFullSightRenderMode
 												.setBackgroundResource(R.drawable.full_sight3);
-									} else if (mLivePlayer.getFullSightRenderMode() == RenderMode.FULLVIEW3D) {
+									} else if (mLivePlayer
+											.getFullSightRenderMode() == RenderMode.FULLVIEW3D) {
 										changeFullSightMode(RenderMode.FULLVIEW);
 										mChangeFullSightRenderMode
 												.setBackgroundResource(R.drawable.full_sight2);
@@ -163,12 +169,13 @@ public class BFMediaPlayerControllerLive extends BFMediaPlayerControllerBase {
 
 							@Override
 							public void onClick(View v) {
-								if (mLivePlayer.getPlayerType() == PLAYER_TYPE.FULL_SIGHT){
+								if (mLivePlayer.getPlayerType() == PLAYER_TYPE.FULL_SIGHT) {
 									if (mLivePlayer.getFullSightControlMode() == ControlMode.TOUCH) {
 										changeFullSightMode(ControlMode.GYROSCOPE);
 										mChangeFullSightControlMode
 												.setBackgroundResource(R.drawable.full_sight0);
-									} else if (mLivePlayer.getFullSightControlMode() == ControlMode.GYROSCOPE) {
+									} else if (mLivePlayer
+											.getFullSightControlMode() == ControlMode.GYROSCOPE) {
 										changeFullSightMode(ControlMode.TOUCH);
 										mChangeFullSightControlMode
 												.setBackgroundResource(R.drawable.full_sight1);
@@ -225,6 +232,7 @@ public class BFMediaPlayerControllerLive extends BFMediaPlayerControllerBase {
 	protected void onClickPlayButton() {
 		if (mLivePlayer != null) {
 			mLivePlayer.stop();
+			Log.i("TIL", "移动网络下强制播放");
 			// 如果希望无论在什么网络下都播放视频，就设置这个标�?
 			mLivePlayer.setForceStartFlag(true);
 			mLivePlayer.start();

@@ -56,6 +56,7 @@ import com.tedu.zab.R;
 /**
  * @author wang Note: You should change your project to UTF8
  */
+@SuppressLint("HandlerLeak")
 public abstract class BFMediaPlayerControllerBase extends FrameLayout implements PlayErrorListener,
 		PlayEventListener, View.OnClickListener, View.OnTouchListener, Handler.Callback {
 	protected final String TAG = BFMediaPlayerControllerBase.class.getSimpleName();
@@ -88,13 +89,13 @@ public abstract class BFMediaPlayerControllerBase extends FrameLayout implements
 	protected TextView mControllerVideoTitle = null;
 	// 切换屏幕
 	protected Button mControllerChangeScreen = null;
-	// 是否允许按返回键直接转到非全屏播�?
+	// 是否允许按返回键直接转到非全屏播�?
 	protected boolean mEnableBackToPortrait = true;
 	// 全屏标志
 	protected boolean mIsFullScreen = false;
-	// 自�?�应屏幕
+	// 自�?�应屏幕
 	private boolean mIsAutoScreen = true;
-	// 屏幕旋转观察�?
+	// 屏幕旋转观察�?
 	protected PlayerOrientationMessageListener mPlayerOrientationMessageListener = null;
 	// 切换全景渲染类型
 	protected ImageView mChangeFullSightRenderMode = null;
@@ -174,7 +175,7 @@ public abstract class BFMediaPlayerControllerBase extends FrameLayout implements
 			throw new NullPointerException("context is invarilid");
 		mMessageHandler = new MyHandler(this);
 		setOnTouchListener(this);
-		// 注册网络监听�?
+		// 注册网络监听�?
 		mNetworkReceiver = BFYNetworkReceiver.getInstance(mContext);
 		mNetworkReceiver.registNetStateChangedListener(new NetStateChangedListener() {
 
@@ -252,33 +253,33 @@ public abstract class BFMediaPlayerControllerBase extends FrameLayout implements
 				LayoutParams.MATCH_PARENT);
 		mLayoutParams.gravity = Gravity.CENTER;
 
-		// 图标�?
+		// 图标�?
 		mStatusController = (FrameLayout) mLayoutInflater.inflate(R.layout.vp_status_controller,
 				this, false);
 		mStatusController.setVisibility(View.VISIBLE);
 		initStatusFrame();
 		addView(mStatusController, mLayoutParams);
-		// 遮挡�?
+		// 遮挡�?
 		mPlaceHoler = (FrameLayout) mLayoutInflater.inflate(R.layout.vp_place_holder, this, false);
 		mPlaceHoler.setVisibility(View.INVISIBLE);
 		addView(mPlaceHoler, mLayoutParams);
 
 		RelativeLayout.LayoutParams layoutParams1 = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-		// 错误提示�?
+		// 错误提示�?
 		mErrorFrame = (RelativeLayout) mLayoutInflater
 				.inflate(R.layout.vp_error_frame, this, false);
 		mErrorFrame.setVisibility(View.INVISIBLE);
 		initErrorFrame();
 		addView(mErrorFrame, layoutParams1);
-		// 播放控制�?
+		// 播放控制�?
 		rebuildPlayerControllerFrame();
-		// 弹幕�?
+		// 弹幕�?
 		mDanmakuFrame = (FrameLayout) mLayoutInflater.inflate(R.layout.danmaku_frame, this, false);
 		mDanmakuView = (IDanmakuView) mDanmakuFrame.findViewById(R.id.danmaku_view);
 		addView(mDanmakuFrame, mLayoutParams);
 		initDanmaku();
-		//p2p 数据展示�?
+		//p2p 数据展示�?
 		mP2pDataFrame = new P2pDataFrame(mContext);
 		mP2pDataFrame.setVisibility(View.GONE);
 		addView(mP2pDataFrame, mLayoutParams);
@@ -635,7 +636,7 @@ public abstract class BFMediaPlayerControllerBase extends FrameLayout implements
 	protected float moveDistanceX = 0.0f;
 	protected float moveDistanceY = 0.0f;
 	protected MotionEvent mLastMotionEvent = null; // 用于滑屏距离测量
-	// 屏幕滑动控制音量的灵敏度，数值越大，灵敏度越�?
+	// 屏幕滑动控制音量的灵敏度，数值越大，灵敏度越�?
 	private static final int VOLUME_SENSITIVITY = 40;
 
 	@Override
@@ -649,16 +650,16 @@ public abstract class BFMediaPlayerControllerBase extends FrameLayout implements
 			moveDistanceX = 0.0f;
 			moveDistanceY = 0.0f;
 			break;
-		case MotionEvent.ACTION_MOVE: {// 左侧滑动更改亮度,右侧滑动调节音量,其它符合要求的滑动调节播放进�?
+		case MotionEvent.ACTION_MOVE: {// 左侧滑动更改亮度,右侧滑动调节音量,其它符合要求的滑动调节播放进�?
 			float afterMoveX = event.getRawX();
 			float afterMoveY = event.getRawY();
 			moveDistanceX = Math.abs(preMoveX - afterMoveX);
 			moveDistanceY = Math.abs(preMoveY - afterMoveY);
 
 			if (mPlayer.getPlayerType() == PLAYER_TYPE.NORMAL) {
-				if (moveDistanceX < mMinX && moveDistanceY < mMinY) {// 移动距离太小,就忽略这个消�?
+				if (moveDistanceX < mMinX && moveDistanceY < mMinY) {// 移动距离太小,就忽略这个消�?
 					return false;
-				} else if (moveDistanceX >= mMinX && moveDistanceY >= mMinY) {// 横向和纵向如果都超过预置距离,则整体忽�?
+				} else if (moveDistanceX >= mMinX && moveDistanceY >= mMinY) {// 横向和纵向如果都超过预置距离,则整体忽�?
 					moveDirection = MOVE_NONE;
 					return false;
 				} else if (moveDistanceX > mMinX && moveDistanceY < mMinY) {// 横向滑动
@@ -672,7 +673,7 @@ public abstract class BFMediaPlayerControllerBase extends FrameLayout implements
 					onPortraitMove(event, TYPE_BRIGHTNESS);
 				} else if (preMoveX > mCenterX) { // 靠右,调节音量
 					onPortraitMove(event, TYPE_VOLUME);
-				} else { // 在中�?,忽略
+				} else { // 在中�?,忽略
 					return false;
 				}
 			}

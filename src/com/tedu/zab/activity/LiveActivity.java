@@ -14,6 +14,7 @@ import android.widget.EditText;
 import bf.cloud.android.modules.p2p.MediaCenter;
 import bf.cloud.android.mxlbarrage.MxlBarrage;
 import bf.cloud.android.mxlbarrage.MxlBarrage.BarrageListener;
+import bf.cloud.android.playutils.BasePlayer.PLAYER_TYPE;
 import bf.cloud.android.playutils.LivePlayer;
 import bf.cloud.hybrid.BFMediaPlayerControllerLive;
 
@@ -42,8 +43,8 @@ public class LiveActivity extends BaseActivity {
 		setContentView(R.layout.activity_live_paly);
 		init();
 		Intent intent = getIntent();
-		mUrl = intent.getStringExtra(LIVE_URL_KEY);
-		mGcid = intent.getStringExtra(LIVE_ID_KEY);
+//		mUrl = intent.getStringExtra(LIVE_URL_KEY);
+//		mGcid = intent.getStringExtra(LIVE_ID_KEY);
 
 	}
 
@@ -54,10 +55,13 @@ public class LiveActivity extends BaseActivity {
 		etText = (EditText) findViewById(R.id.live_et_message);
 		btnSend = (Button) findViewById(R.id.live_btn_send_message);
 		bpvl = (BFMediaPlayerControllerLive) findViewById(R.id.live_player);
-		mLivePlayer =   (LivePlayer) bpvl.getPlayer();
+		mLivePlayer = (LivePlayer) bpvl.getPlayer();
 		// 设置播放路径
-		mLivePlayer.setDataSource(mUrl,mGcid);
-		mLivePlayer.setForceStartFlag(true);
+		mLivePlayer.setDataSource(mUrl);
+		// 普通播放器
+		mLivePlayer.setPlayerType(PLAYER_TYPE.NORMAL);
+		// 普通直播
+		mLivePlayer.setLowLatency(false);
 		// 设置弹幕目标路径
 		mBarrage = new MxlBarrage(mGcid);
 		// /这只弹幕监听回调方法
@@ -67,7 +71,7 @@ public class LiveActivity extends BaseActivity {
 				bpvl.addDanmaku(false, arg1);
 			}
 		});
-
+		bpvl.setAutoChangeScreen(true);
 		btnSend.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				// 发送弹幕
@@ -110,10 +114,10 @@ public class LiveActivity extends BaseActivity {
 
 	@Override
 	protected void onDestroy() {
-//		if (mLivePlayer != null) {
-//			mLivePlayer.release();
-//			mLivePlayer.stop();// 播放器
-//		}
+		// if (mLivePlayer != null) {
+		// mLivePlayer.release();
+		// mLivePlayer.stop();// 播放器
+		// }
 		try {
 			bpvl.finalize();// 停止直播控件
 		} catch (Throwable e) {
